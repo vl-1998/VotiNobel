@@ -1,10 +1,11 @@
 package it.polito.tdp.nobel.model;
 
-import java.util.List;
+import java.util.Set;
 
 public class Model {
 
-	public List<Esame> calcolaSottoinsiemeEsami(int numeroCrediti) {
+	
+	public Set<Esame> calcolaSottoinsiemeEsami(int numeroCrediti) {
 		
 		System.out.println("TODO!");
 		
