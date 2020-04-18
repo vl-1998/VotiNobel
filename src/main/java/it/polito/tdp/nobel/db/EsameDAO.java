@@ -13,6 +13,7 @@ public class EsameDAO {
 
 	public List<Esame> getTuttiEsami() {
 
+		//METODO che permette di ottenere tutti gli esami richiesti
 		final String sql = "SELECT * FROM esami";
 
 		List<Esame> voti = new LinkedList<Esame>();

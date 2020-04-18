@@ -1,0 +1,96 @@
+Dobbiamo pensare a un programma ricorsivo che deve generare tutti i possibili sottoinsiemi di un insieme (SET) dato e l'ordine non
+ci interessa.
+
+INPUT: 
+	- Insieme di Esame (Partenza);
+	- # di crediti (m);
+OUTPUT:
+	- Set di Esame, sottoinsieme di PARTENZA, tale per cui:
+		* la somma dei crediti dia esattamente m, non un credito in più non uno in meno, Somma Esame.crediti==m;
+		* Media Esame.voto sia MAX
+		
+CI SONO 2 APPROCCI PRINCIPALI
+APPROCCIO 1: Generare i sottoinsiemi di partenza 1 caso per volta, quindi decidendo esame per esame, se debba o non debba far parte 
+della soluzione. 
+
+* Livello della ricorsione L mi indica quale corso sto decidendo di mettere o non mettere
+
+Analizzo ad ogni livello l l'elemento in posizione l-1	
+	elemento 1 dell'insieme (Livello 0)
+		- Lo inserisco -> parziale ={e1}
+			Elemento 2 dell'inisieme (livello 1)
+				- Lo inserisco -> parziale = {e1, e2}
+				- Non lo inserisco -> parziale = {e1}
+		- Non lo inserisco = { }
+			Elemento 2 dell'inisieme (livello 1)
+				- Lo inserisco -> parziale = {e2}
+				- Non lo inserisco -> parziale = { }
+				
+* Soluzione parziale == sottoinsieme composto dagli esami tra 0 e l-1
+
+Ad ogni livello della ricorsione posso avere tante soluzioni parziali diverse, man mano che scendo 
+nell'albero ella ricorsione il numero di soluzioni parziali aumenta
+
+* Generazione di un sottoproblema: decidere se inserire 
+eaami[l] oppure no. Due possibili sottoproblemi:
+	1. Non aggiungo niente alla soluzione parziale;
+	2. Soluzione parziale + esami[l]
+	
+* CASI TERMINALI
+Nei casi terminali, prima controllo il numero di crediti, se questa somma è maggiore di m, esco dalla ricorsione, altrimenti 
+controllo la media, oppure tengo traccia della soluzione parziale.
+
+	- l=MAX -> non ci sono più corsi da aggiungere
+		* se parziale.sommaCrediti()== m -> calcolare la media 
+			* se parziale.media() > media di tutte le altre soluzioni viste fino ad ora, allora dovro tenere traccia di questa soluzione
+			
+		* se parziale.sommaCrediti() != m -> abbandono la soluzione
+	
+	- Posso fermarmi quando i crediti della mia soluzione parziale sono già maggiori di m, se parziale.sommaCrediti() > m -> mi fermo subito,
+																															è inutile continuare ad ggiungere altri esami
+	- Se parizale. sommaCrediti() == m -> calcolo subito la media e controllo se è migliore di quella migliore che avevo fino ad adesso 
+		* se parziale.media() > media di tutte le altre soluzioni viste fino ad ora, allora dovro tenere traccia di questa soluzione. In ogni caso fermo la ricorsione
+		 sono ad una soluzione parziale che mi dia quei crediti
+		 
+APPROCCIO 2: ad ogni livello aggiungo un corso, devo decidere quale, li provo tutti. Ad ogni livello l la soluzione parziale sarà
+un sottoinsieme di esattamente l esami. 
+
+* Generazione di un sottoproblema: aggiunta di un nuovo esame alla soluzione parziale. Per tutti i casi possibili (tutti gli esami non
+ancora compresi nella soluzione parziale): 
+		sottoproblema = parziale + Esame i
+		
+		Al primo livello di ricorsione ho N scelte possibili, dove N è la dimensione di PARTENZA. Provo tutte le N scelte, metto l'esame 0
+		nella parizale e lancio la ricorsione, metto l'esame 1 nella parziale e lacio la ricorsione. 
+		
+		A livello 0, abbiamo N sottoproblemi, supponiamo che PARTENZA = {e1, e2, e3}
+		
+		[l=0] sottoproblema parziale = {e1}
+			[l=1] parziale = {e1, e2}
+			[l=1] parziale = {e1, e3}
+		[l=0] sottoproblema parziale = {e2}
+			[l=1] parziale = {e2, e1}
+			[l=1] parziale = {e2, e3}
+		[l=0] sottoproblema parziale = {e3}
+			[l=1] parziale = {e3, e1}
+			[l=1] parziale = {e3, e2}
+			
+			FINISCO AD ESPLORARE SOLUZIONI PARZIALI GIA ESPLORATE PERCHE NON MI INTERESSA L'ORDINE
+
+*CASI TERMINALI come sopra.
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+																															
