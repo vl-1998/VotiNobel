@@ -34,6 +34,8 @@ public class FXMLController {
 
     @FXML
     void doCalcolaCombinazione(ActionEvent event) {
+    	txtResult.clear();
+    	
     		try {
     			int numeroCrediti = Integer.parseInt(txtInput.getText());
     			

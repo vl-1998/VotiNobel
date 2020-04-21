@@ -20,8 +20,11 @@ public class Model {
 	public Set<Esame> calcolaSottoinsiemeEsami(int numeroCrediti) {
 		//impostiamo la chiamata della ricorsione
 		
+		bestMedia=0.0;
+		bestSoluzione=null;
 		Set <Esame> parziale = new HashSet<>();
 		cerca1 (parziale, 0, numeroCrediti);
+		
 		//cerca2 (parziale, 0, numeroCrediti); E' VERAMENTE TROPPO LENTA
 		
 		
@@ -44,6 +47,7 @@ public class Model {
 				// devo sovrascrivere la soluzione migliore
 				bestSoluzione = new HashSet <>(parziale);
 				bestMedia = media; //tengo traccia della migliore soluzioen incontrata
+				
 			}
 		}
 		
